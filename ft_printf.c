@@ -12,45 +12,46 @@
 
 #include "ft_printf.h"
 
-static int	put(int i, const char *s, va_list args)
+static int	put(const char *s, va_list args)
 {
-	if (s[i + 1] == 'c')
+	if (*s == 'c')
 		return (ft_putchar(va_arg(args, int)));
-	else if (s[i + 1] == 's')
+	else if (*s == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	else if (s[i + 1] == 'p')
+	else if (*s == 'p')
 		return (ft_address(va_arg(args, void *)));
-	else if (s[i + 1] == 'd' || s[i + 1] == 'i')
+	else if (*s == 'd' || *s == 'i')
 		return (ft_putnbr(va_arg(args, int)));
-	else if (s[i + 1] == 'u')
+	else if (*s == 'u')
 		return (ft_putnbr_u(va_arg(args, unsigned int)));
-	else if (s[i + 1] == 'x' || s[i + 1] == 'X')
-		return (ft_hexadecimal(va_arg(args, long), s[i + 1]));
-	else if (s[i + 1] == '%')
+	else if (*s == 'x' || *s == 'X')
+		return (ft_hexadecimal(va_arg(args, long), *s));
+	else if (*s == '%')
 		return (ft_putchar('%'));
 	return (0);
 }
 
 int	ft_printf(const char *s, ...)
 {
-	int		i;
 	va_list	args;
-	va_list	argslen;
 	int		len;
 
-	i = 0;
+	len = 0;
 	va_start(args, s);
-	va_copy(argslen, args);
-	while (s[i] != '\0')
+	while (*s)
 	{
-		if (s[i] == '%')
+		if (*s == '%' && *(s + 1) == '\0')
+			return (-1);
+		if (*s == '%' && (*(s + 1) == 'c' || *(s + 1) == 's' || *(s + 1) == 'p'
+				|| *(s + 1) == 'd' || *(s + 1) == 'i' || *(s + 1) == 'u'
+				|| *(s + 1) == 'x' || *(s + 1) == 'X' || *(s + 1) == '%'))
 		{
-			len += put(i, s, args);
-			i++;
+			s++;
+			len += put(s, args);
 		}
 		else
-			len += ft_putchar(s[i]);
-		i++;
+			len += ft_putchar(*s);
+		s++;
 	}
 	va_end(args);
 	return (len);
@@ -58,14 +59,17 @@ int	ft_printf(const char *s, ...)
 // #include <stdio.h>
 // int	main()
 // {
-// 	char *s = "hello";
-// 	// char c = 'n';
-// 	// int nb = 2;
+// 	//char *s = "yui";
+// 	char c = 'n';
+// 	//int d = 123;
 // 	// int i = -214748;
 // 	// unsigned u = 2147;
 // 	// int h = 461;
 // 	// int	a = ft_printf("\n%u", (unsigned int)2147483648);
 // 	// int b = printf("\n%u", (unsigned int)2147483648);
 // 	// printf("\n%d %d", a, b);
-// 	printf("%s", s);
+// 	int a = ft_printf("%c", c);
+// 	printf("\n");
+// 	int b = printf("%c", c);
+// 	printf("\n%d|%d", a, b);
 // }
