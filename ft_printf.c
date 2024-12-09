@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboukent <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:15:15 by aboukent          #+#    #+#             */
-/*   Updated: 2024/12/02 15:00:58 by aboukent         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:02:34 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	put(const char *s, va_list args)
 	else if (*s == 'u')
 		return (ft_putnbr_u(va_arg(args, unsigned int)));
 	else if (*s == 'x' || *s == 'X')
-		return (ft_hexadecimal(va_arg(args, long), *s));
+		return (ft_hexadecimal(va_arg(args, unsigned int), *s));
 	else if (*s == '%')
 		return (ft_putchar('%'));
 	return (0);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hexadecimal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboukent <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:06:05 by aboukent          #+#    #+#             */
-/*   Updated: 2024/12/02 14:39:48 by aboukent         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:04:02 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_hexadecimal(long i, char c)
+int	ft_hexadecimal(unsigned int i, char c)
 {
 	char	*hd;
 	int		len;
